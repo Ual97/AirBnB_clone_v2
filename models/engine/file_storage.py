@@ -13,8 +13,11 @@ class FileStorage:
         if (obj is None):
             return
         objdict = obj
-        if (f'{objdict.__class__}.{objdict.id}' in self.__objects):
-            del self.__objects[f'{objdict.__class__}.{objdict.id}']
+        try:
+            if (f'{objdict.__class__}.{objdict.id}' in self.__objects):
+                del self.__objects[f'{objdict.__class__}.{objdict.id}']
+        except Exception:
+            pass
 
     def all(self, cls=None):
         """Returns a dictionary of models currently in storage"""
@@ -22,7 +25,7 @@ class FileStorage:
             return FileStorage.__objects
         aux = {}
         for key, value in self.__objects.items():
-            if (cls.__name__ == key.split(".")[0]):
+            if (cls.__class__ == key.split(".")[0]):
                 aux[key] = value
         return(aux)
 
