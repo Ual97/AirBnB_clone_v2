@@ -25,7 +25,7 @@ class FileStorage:
             return FileStorage.__objects
         aux = {}
         for key, value in self.__objects.items():
-            if (cls.__class__ == key.split(".")[0]):
+            if (cls.__name__ == key.split(".")[0]):
                 aux[key] = value
         return(aux)
 
