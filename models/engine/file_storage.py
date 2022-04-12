@@ -15,7 +15,7 @@ class FileStorage:
         objdict = obj
         try:
             if (f'{objdict.__class__}.{objdict.id}' in self.__objects):
-                del self.__objects[f'{objdict.__class__}.{objdict.id}']
+                del self.__objects.pop(f'{objdict.__class__}.{objdict.id}')
         except Exception:
             pass
 
