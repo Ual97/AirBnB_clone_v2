@@ -2,10 +2,8 @@
 """ City Module for HBNB project """
 from sqlalchemy import Column, ForeignKey, String
 from models.base_model import Base, BaseModel
-from sqlalchemy.orm import relationship
 from os import getenv
-import models
-from models.state import State
+
 
 class City(BaseModel, Base):
     """ The city class, contains state ID and name """
