@@ -18,6 +18,7 @@ class State(BaseModel, Base):
     def cities(self):
         """"""
         aux = []
+        import models
         for city in models.storage.all("City").values():
             if (city.state_id == self.id):
                 aux.append(city)
