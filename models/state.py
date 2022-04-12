@@ -18,3 +18,10 @@ class State(BaseModel):
     else:
         name = ""
     
+    @property
+    def cities(self):
+        aux = []
+        for city in models.storage.all("City").value():
+            if (city.state_id == self.id):
+                aux.append(city)
+        return (aux)
