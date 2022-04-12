@@ -35,7 +35,7 @@ class DBStorage:
                 aux[dic] = i
             return (aux)
         else:
-            for dic, value in models.classes.items():
+            for dic, value in models.HBNBCommand.classes.items():
                 if dic != "BaseModel":
                     objs = self.__session.query(value).all()
                     if len(objs) > 0:
