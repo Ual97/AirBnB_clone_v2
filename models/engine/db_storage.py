@@ -16,7 +16,7 @@ from models.state import State
 from models.city import City
 from models.amenity import Amenity
 from models.review import Review
-
+from models import storage
 
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm import scoped_session
@@ -50,7 +50,11 @@ class DBStorage:
         else:
             for dic, value in classes.items():
                 if dic != "BaseModel":
-                    objs = self.__session.query(value).all()
+                    objs = []
+                    try:
+                        objs = self.__session.query(value).all()
+                    except Exception:
+                        pass
                     if len(objs) > 0:
                         for i in objs:
                             dic = "{}.{}".format(i.__class__.__name__, i.id)
