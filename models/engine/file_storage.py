@@ -14,9 +14,11 @@ class FileStorage:
             return
         objdict = obj
         try:
+            from models import storage
             if (f'{objdict.__class__}.{objdict.id}' in self.__objects):
                 delete = self.__objects.pop(f'{objdict.__class__}.{objdict.id}')
                 delete.delete()
+                storage.save()
         except Exception:
             pass
 
