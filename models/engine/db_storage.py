@@ -8,6 +8,7 @@ from models.base_model import Base, BaseModel
 from sqlalchemy.orm import relationship
 from sqlalchemy import (create_engine)
 from os import getenv
+import models
 
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm import scoped_session
@@ -28,14 +29,21 @@ class DBStorage:
         """"""
         aux = {}
         if (cls is not None):
-            objects = self.__session.query(cls).all()
+            objects = self.__session.query(models.classes[cls]).all()
             for i in objects:
                 key = '{}.{}'.format(i.__class__.__name__, i.id)
                 aux[key] = i
             return (aux)
         else:
-            self.__session.query(
-                User, State, City, Amenity, Place, Review).all()
+            for key, value in models.classes.items():
+                if key != "BaseModel":
+                    objs = self.__session.query(value).all()
+                    if len(objs) > 0:
+                        for i in objs:
+                            key = "{}.{}".format(i.__class__.__name__, i.id)
+                            aux[key] = i
+            return (aux)
+
 
     def new(self, obj):
         """add object to current database session"""
@@ -60,7 +68,7 @@ class DBStorage:
         from models.user import User
         from models.review import Review
         from models.base_model import BaseModel
-        Base.metadata.create_all(self.__engine)
+        self.__session = Base.metadata.create_all(self.__engine)
         session_factory = sessionmaker(
             bind=self.__engine, expire_on_commit=False)
         Session = scoped_session(session_factory)
