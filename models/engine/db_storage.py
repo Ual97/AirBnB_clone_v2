@@ -9,10 +9,23 @@ from sqlalchemy.orm import relationship
 from sqlalchemy import (create_engine)
 from os import getenv
 import models
+from base_model import BaseModel
+from user import User
+from place import Place
+from state import State
+from city import City
+from amenity import Amenity
+from review import Review
+
 
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm import scoped_session
 
+classes = {
+               'BaseModel': BaseModel, 'User': User, 'Place': Place,
+               'State': State, 'City': City, 'Amenity': Amenity,
+               'Review': Review
+              }
 
 class DBStorage:
     """Engine for MySQL databse"""
@@ -29,13 +42,13 @@ class DBStorage:
         """"""
         aux = {}
         if (cls is not None):
-            objects = self.__session.query(models.classes[cls]).all()
+            objects = self.__session.query(classes[cls]).all()
             for i in objects:
                 dic = '{}.{}'.format(i.__class__.__name__, i.id)
                 aux[dic] = i
             return (aux)
         else:
-            for dic, value in models.classes.items():
+            for dic, value in classes.items():
                 if dic != "BaseModel":
                     objs = self.__session.query(value).all()
                     if len(objs) > 0:
