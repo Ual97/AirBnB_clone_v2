@@ -9,7 +9,7 @@ import models
 from models.state import State
 
 
-class User(BaseModel):
+class User(BaseModel, Base):
     """This class defines a user by various attributes"""
     __tablename__ = 'users'
     email = Column(String(128), nuallable=False)
