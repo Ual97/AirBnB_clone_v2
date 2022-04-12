@@ -3,8 +3,10 @@
 from os import stat_result, getenv
 
 from sqlalchemy import Column, String
-from models.base_model import BaseModel
+from models.base_model import BaseModel, Base
 from sqlalchemy.orm import relationship
+import models
+
 
 
 class State(BaseModel):
