@@ -31,17 +31,17 @@ class DBStorage:
         if (cls is not None):
             objects = self.__session.query(models.classes[cls]).all()
             for i in objects:
-                key = '{}.{}'.format(i.__class__.__name__, i.id)
-                aux[key] = i
+                dic = '{}.{}'.format(i.__class__.__name__, i.id)
+                aux[dic] = i
             return (aux)
         else:
-            for key, value in models.classes.items():
-                if key != "BaseModel":
+            for dic, value in models.classes.items():
+                if dic != "BaseModel":
                     objs = self.__session.query(value).all()
                     if len(objs) > 0:
                         for i in objs:
-                            key = "{}.{}".format(i.__class__.__name__, i.id)
-                            aux[key] = i
+                            dic = "{}.{}".format(i.__class__.__name__, i.id)
+                            aux[dic] = i
             return (aux)
 
 
