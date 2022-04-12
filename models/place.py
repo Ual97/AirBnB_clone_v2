@@ -4,6 +4,7 @@ from ast import For
 from email.policy import default
 from sqlalchemy import Column, Float, Integer, String, ForeignKey
 from models.base_model import Base, BaseModel
+from sqlalchemy.orm import relationship
 import models
 
 
@@ -21,3 +22,15 @@ class Place(BaseModel, Base):
     latitude = Column(Float)
     longitude = Column(Float)
     amenity_ids = []
+
+    reviews = relationship("Review", backref="user", cascade="all, delete, delete-orphan")
+
+    @property
+    def reviews(self):
+        """getter for reviews"""
+        aux = []
+        import models
+        for review in models.storage.all("Review").values():
+            if (review.place_id == self.id):
+                aux.append(review)
+        return (aux)
