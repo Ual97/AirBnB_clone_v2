@@ -2,7 +2,6 @@
 """This module defines a class User"""
 from sqlalchemy import Column, String
 from models.base_model import Base, BaseModel
-import models
 
 
 
@@ -14,4 +13,3 @@ class User(BaseModel, Base):
     first_name = Column(String(128))
     last_name = Column(String(128))
     
-models.storage.reload()
