@@ -20,8 +20,9 @@ class State(BaseModel):
     
     @property
     def cities(self):
+        """"""
         aux = []
-        for city in models.storage.all("City").value():
+        for city in models.storage.all("City").values():
             if (city.state_id == self.id):
                 aux.append(city)
         return (aux)
