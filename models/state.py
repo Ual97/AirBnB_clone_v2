@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """ State Module for HBNB project """
-from os import stat_result
+from os import stat_result, getenv
 from tokenize import String
 
 from sqlalchemy import Column
@@ -10,8 +10,10 @@ from sqlalchemy.orm import relationship
 
 class State(BaseModel):
     """ State class """
-    name = ""
-    __tablename__ = 'states'
-    name = Column(String(128), nullable=False)
-    cities = relationship("City", cascade="all, delete-orphan")
+    if (getenv("HBNB_TYPE_STORAGE") == "db"):
+        __tablename__ = 'states'
+        name = Column(String(128), nullable=False)
+        cities = relationship("City", cascade="all, delete, delete-orphan")
+    else:
+        name = ""
     
