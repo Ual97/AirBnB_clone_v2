@@ -60,7 +60,7 @@ class DBStorage:
         from models.user import User
         from models.review import Review
         from models.base_model import BaseModel
-        self.__session = Base.metadata.create_all(self.__engine)
+        Base.metadata.create_all(self.__engine)
         session_factory = sessionmaker(
             bind=self.__engine, expire_on_commit=False)
         Session = scoped_session(session_factory)
