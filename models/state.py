@@ -1,9 +1,8 @@
 #!/usr/bin/python3
 """ State Module for HBNB project """
 from os import stat_result, getenv
-from tokenize import String
 
-from sqlalchemy import Column
+from sqlalchemy import Column, String
 from models.base_model import BaseModel
 from sqlalchemy.orm import relationship
 
