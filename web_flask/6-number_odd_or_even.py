@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """
 script starts Flask web app with more custom routes for c and python and int
+depending if int is odd or even
 """
 
 from flask import Flask, render_template
