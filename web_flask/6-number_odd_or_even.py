@@ -47,11 +47,17 @@ def html_if_int(n):
 
 
 @app.route('/number_odd_or_even/<int:n>')
-def html_odd_or_even(n):
+def oddoreven(n):
     """display html page only if int given, depends if int is odd or even"""
-    odd_or_even = "even" if (n % 2 == 0) else "odd"
-    return render_template('6-number_odd_or_even.html',
-                           n=n, odd_or_even=odd_or_even)
+   if n.isnumeric():
+        if int(n) % 2 == 0:
+            return render_template("6-number_odd_or_even.html",
+                                   number=n, oddeven='even')
+        else:
+            return render_template("6-number_odd_or_even.html",
+                                   number=n, oddeven='odd')
+    else:
+        return abort(404) 
 
 
 if __name__ == "__main__":
