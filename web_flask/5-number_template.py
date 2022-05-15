@@ -3,7 +3,7 @@
 script starts Flask web app with more custom routes for c and python and int
 """
 
-from flask import Flask
+from flask import Flask, render_template
 app = Flask(__name__)
 app.url_map.strict_slashes = False
 
