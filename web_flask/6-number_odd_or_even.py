@@ -4,7 +4,7 @@ script starts Flask web app with more custom routes for c and python and int
 depending if int is odd or even
 """
 
-from flask import Flask, render_template
+from flask import Flask, render_template, abort
 app = Flask(__name__)
 app.url_map.strict_slashes = False
 
@@ -61,4 +61,4 @@ def oddoreven(n):
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+    app.run()
